@@ -39,6 +39,7 @@ type Client struct {
 	ClientName          string
 	UserAgent           string
 	PasswordAuth        bool
+	BasicAuth           bool
 	RequestedAPIVersion string
 
 	openSubsonicExtensions []*OpenSubsonicExtension
@@ -63,7 +64,7 @@ func generateSalt() string {
 // Returns ErrAuthenticationFailure if the user/pass combo is incorrect,
 // or another error type for any other failure reason.
 func (s *Client) Authenticate(password string) error {
-	if s.PasswordAuth {
+	if s.PasswordAuth || s.BasicAuth {
 		s.password = password
 	} else {
 		salt := generateSalt()
@@ -135,6 +136,10 @@ func (s *Client) setupRequest(method string, endpoint string, params url.Values)
 	}
 	if u := s.UserAgent; u != "" {
 		req.Header.Set("User-Agent", u)
+	}
+
+	if s.BasicAuth {
+		req.SetBasicAuth(s.User, s.password)
 	}
 
 	q := req.URL.Query()
