@@ -278,15 +278,26 @@ func unmarshalJSONResponse(data []byte) (*Response, error) {
 
 // Ping is used to test connectivity with the server. It returns true if the server is up.
 // Should generally NOT be called before authenticating as it will be considered an authentication
-// by the Subsonic server. (Though this function will still return true)
-func (s *Client) Ping() bool {
+// by the Subsonic server. (Though this function will still return a nil Go error.)
+func (s *Client) Ping() (*PingResponse, error) {
 	resp, err := s.Request("GET", "ping", nil)
 	if err != nil {
 		log.Println(err)
-		return false
+		return nil, err
 	}
-	resp.Body.Close()
-	return true
+	defer resp.Body.Close()
+	parsed, err := s.unmarshalResponse(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	return &PingResponse{
+		Status:        parsed.Status,
+		Version:       parsed.Version,
+		Type:          parsed.Type,
+		ServerVersion: parsed.ServerVersion,
+		OpenSubsonic:  parsed.OpenSubsonic,
+		ServerError:   parsed.Error,
+	}, nil
 }
 
 // GetLicense retrieves details about the software license. Subsonic requires a license after a 30-day trial, compatible applications have a perpetually valid license.

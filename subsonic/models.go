@@ -16,6 +16,15 @@ import (
 	"time"
 )
 
+type PingResponse struct {
+	Status        string
+	Version       string
+	Type          string
+	ServerVersion string
+	OpenSubsonic  bool
+	ServerError   *Error
+}
+
 // AlbumID3 is an album that's organized by music file tags.
 type AlbumID3 struct {
 	ID                  string    `xml:"id,attr"                       json:"id"`
@@ -1008,7 +1017,9 @@ type Response struct {
 	Error                  *Error                   `xml:"error"                 json:"error,omitempty"`
 	Status                 string                   `xml:"status,attr"           json:"status"`
 	Version                string                   `xml:"version,attr"          json:"version"`
-	OpenSubsonic           bool                     `xml:"openSubsonic,attr"     json:"openSubsonic,omitempty"`
+	Type                   string                   `xml:"type,attr"             json:"type"`
+	ServerVersion          string                   `xml:"serverVersion,attr"    json:"serverVersion"`
+	OpenSubsonic           bool                     `xml:"openSubsonic,attr"     json:"openSubsonic"`
 	OpenSubsonicExtensions []*OpenSubsonicExtension `xml:"openSubsonicExtensions" json:"openSubsonicExtensions,omitempty"`
 	LyricsList             *LyricsList              `xml:"lyricsList"            json:"lyricsList,omitempty"`
 }

@@ -4,7 +4,7 @@ import "testing"
 
 func runClientTests(client Client, t *testing.T) {
 	t.Run("Ping", func(t *testing.T) {
-		if !client.Ping() {
+		if _, err := client.Ping(); err != nil {
 			t.Error("Ping failed (somehow)")
 		}
 	})
