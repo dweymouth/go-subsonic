@@ -69,6 +69,12 @@ type PlayQueueByIndex struct {
 	ChangedBy    string    `xml:"changedBy,attr"              json:"changedBy"`
 }
 
+type DiscTitle struct {
+	Disc     int    `xml:"disc,attr"               json:"disc"`
+	Title    string `xml:"title,attr"              json:"title"`
+	CoverArt string `xml:"coverArt,attr,omitempty" json:"coverArt,omitempty"`
+}
+
 func (t *PlayQueueByIndex) MarshalJSON() ([]byte, error) {
 	type T PlayQueueByIndex
 	var layout struct {

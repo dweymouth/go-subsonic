@@ -27,26 +27,27 @@ type PingResponse struct {
 
 // AlbumID3 is an album that's organized by music file tags.
 type AlbumID3 struct {
-	ID                  string    `xml:"id,attr"                       json:"id"`
-	Song                []*Child  `xml:"song,omitempty"                json:"song,omitempty"`
-	Name                string    `xml:"name,attr"                     json:"name"`
-	SortName            string    `xml:"sortName,attr,omitempty"       json:"sortName,omitempty"`
-	Artist              string    `xml:"artist,attr,omitempty"         json:"artist,omitempty"`
-	ArtistID            string    `xml:"artistId,attr,omitempty"       json:"artistId,omitempty"`
-	Artists             []IDName  `xml:"artists,omitempty"             json:"artists,omitempty"`
-	CoverArt            string    `xml:"coverArt,attr,omitempty"       json:"coverArt,omitempty"`
-	SongCount           int       `xml:"songCount,attr"                json:"songCount"`
-	Duration            int       `xml:"duration,attr"                 json:"duration"`
-	PlayCount           int64     `xml:"playCount,attr,omitempty"      json:"playCount,omitempty"`
-	Created             time.Time `xml:"created,attr"                  json:"created"`
-	Starred             time.Time `xml:"starred,attr,omitempty"        json:"starred,omitempty"`
-	Year                int       `xml:"year,attr,omitempty"           json:"year,omitempty"`
-	ReleaseDate         *ItemDate `xml:"releaseDate,omitempty"         json:"releaseDate,omitempty"`
-	OriginalReleaseDate *ItemDate `xml:"originalReleaseDate,omitempty" json:"originalReleaseDate,omitempty"`
-	Genre               string    `xml:"genre,attr,omitempty"          json:"genre,omitempty"`
-	Genres              []IDName  `xml:"genres,omitempty"              json:"genres,omitempty"`
-	ReleaseTypes        []string  `xml:"releaseTypes,omitempty"        json:"releaseTypes,omitempty"`
-	IsCompilation       bool      `xml:"isCompilation,attr"            json:"isCompilation,omitempty"`
+	ID                  string      `xml:"id,attr"                       json:"id"`
+	Song                []*Child    `xml:"song,omitempty"                json:"song,omitempty"`
+	Name                string      `xml:"name,attr"                     json:"name"`
+	SortName            string      `xml:"sortName,attr,omitempty"       json:"sortName,omitempty"`
+	Artist              string      `xml:"artist,attr,omitempty"         json:"artist,omitempty"`
+	ArtistID            string      `xml:"artistId,attr,omitempty"       json:"artistId,omitempty"`
+	Artists             []IDName    `xml:"artists,omitempty"             json:"artists,omitempty"`
+	CoverArt            string      `xml:"coverArt,attr,omitempty"       json:"coverArt,omitempty"`
+	SongCount           int         `xml:"songCount,attr"                json:"songCount"`
+	Duration            int         `xml:"duration,attr"                 json:"duration"`
+	PlayCount           int64       `xml:"playCount,attr,omitempty"      json:"playCount,omitempty"`
+	Created             time.Time   `xml:"created,attr"                  json:"created"`
+	Starred             time.Time   `xml:"starred,attr,omitempty"        json:"starred,omitempty"`
+	Year                int         `xml:"year,attr,omitempty"           json:"year,omitempty"`
+	ReleaseDate         *ItemDate   `xml:"releaseDate,omitempty"         json:"releaseDate,omitempty"`
+	OriginalReleaseDate *ItemDate   `xml:"originalReleaseDate,omitempty" json:"originalReleaseDate,omitempty"`
+	Genre               string      `xml:"genre,attr,omitempty"          json:"genre,omitempty"`
+	Genres              []IDName    `xml:"genres,omitempty"              json:"genres,omitempty"`
+	ReleaseTypes        []string    `xml:"releaseTypes,omitempty"        json:"releaseTypes,omitempty"`
+	IsCompilation       bool        `xml:"isCompilation,attr"            json:"isCompilation,omitempty"`
+	DiscTitles          []DiscTitle `xml:"discTitles,omitempty"          json:"discTitles,omitempty"`
 }
 
 func (t *AlbumID3) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
